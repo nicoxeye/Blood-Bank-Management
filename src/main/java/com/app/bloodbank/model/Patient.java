@@ -35,9 +35,10 @@ public class Patient {
 
     public Patient() {}
 
-    public Patient(String name, String surname, LocalDate dateOfBirth, String gender, Address address, String phoneNumber) {
+    public Patient(String name, String surname, BloodType bloodType, LocalDate dateOfBirth, String gender, Address address, String phoneNumber) {
         this.name = name.toUpperCase();
         this.surname = surname.toUpperCase();
+        this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
 
         switch (gender) {
@@ -55,6 +56,6 @@ public class Patient {
 
     @Override
     public String toString() {
-        return name+", "+surname+", "+dateOfBirth.getYear()+", "+gender+", "+address.getCountry()+", "+address.getCity()+", "+phoneNumber;
+        return name+", "+surname+", "+ bloodType.getBloodGroup() + ", " + bloodType.getProtein() + ", " +dateOfBirth.getYear()+", "+gender+", "+address.getCountry()+", "+address.getCity()+", "+phoneNumber;
     }
 }

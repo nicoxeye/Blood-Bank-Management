@@ -200,3 +200,5 @@ README.html
 .idea
 .exercism
 HELP.md
+data/myDB.mv.db
+data/myDB.trace.db

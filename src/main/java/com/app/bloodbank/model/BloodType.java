@@ -5,16 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
 public class BloodType {
     @Id
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BloodGroup bloodGroup;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RhFactor protein;
 
