@@ -41,6 +41,16 @@ public class Donor {
     @OneToMany(mappedBy = "donor")
     private List<Donation> donations;
 
-    @OneToOne(mappedBy = "donor")
-    private User user;
+    public Donor() {}
+
+    public Donor(String name, String surname, BloodType bloodType, LocalDate dateOfBirth, Gender gender, Address address, String phoneNumber) {
+        this.name = name;
+        this.surname = surname;
+        this.bloodType = bloodType;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
 }

@@ -23,7 +23,4 @@ public class Hospital {
     @OneToMany(mappedBy = "hospital")
     private List<Request> requests;
 
-    @OneToOne(mappedBy = "hospital")
-    private User user;
-
 }

@@ -3,6 +3,7 @@ package com.app.bloodbank.repository;
 import com.app.bloodbank.model.BloodGroup;
 import com.app.bloodbank.model.BloodType;
 import com.app.bloodbank.model.RhFactor;
+import jakarta.persistence.Id;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
