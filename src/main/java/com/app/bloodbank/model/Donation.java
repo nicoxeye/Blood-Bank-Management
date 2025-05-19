@@ -1,9 +1,6 @@
 package com.app.bloodbank.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,12 +17,15 @@ public class Donation {
     private LocalDate date;
 
     @ManyToOne
+    @JoinColumn(name = "donor_id")
     private Donor donor;
 
     @ManyToOne
+    @JoinColumn(name = "bloodbank_id")
     private BloodBank bloodBank;
 
     @ManyToOne
+    @JoinColumn(name = "bloodtype_id")
     private BloodType bloodType;
 
     public Donation() { }

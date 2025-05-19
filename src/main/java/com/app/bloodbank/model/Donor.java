@@ -43,12 +43,16 @@ public class Donor {
 
     public Donor() {}
 
-    public Donor(String name, String surname, BloodType bloodType, LocalDate dateOfBirth, Gender gender, Address address, String phoneNumber) {
+    public Donor(String name, String surname, BloodType bloodType, LocalDate dateOfBirth, String gender, Address address, String phoneNumber) {
         this.name = name;
         this.surname = surname;
         this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
+        switch (gender) {
+            case "MALE", "M" -> this.gender = Gender.MALE;
+            case "FEMALE", "F" -> this.gender = Gender.FEMALE;
+            case "OTHER", "O" -> this.gender = Gender.OTHER;
+        }
         this.address = address;
         this.phoneNumber = phoneNumber;
     }

@@ -8,4 +8,5 @@ public interface DonorService {
     public abstract void updateDonor(Long id, Donor updatedData);
     public abstract void deleteDonor(Long id);
     public abstract List<Donor> getAllDonors();
+    public abstract Donor getDonorById(Long id);
 }

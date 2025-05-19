@@ -7,4 +7,5 @@ public interface PatientService {
     public abstract void updatePatient(Long id, Patient updatedData);
     public abstract void deletePatient(Long id);
     public abstract List<Patient> getAllPatients();
+    public abstract Patient getPatientById(Long id);
 }
