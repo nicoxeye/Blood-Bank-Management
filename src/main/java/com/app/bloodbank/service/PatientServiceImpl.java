@@ -46,4 +46,9 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findAll();
     }
 
+    @Override
+    public Patient getPatientById(Long id) {
+        return patientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Patient not found with ID: " + id));
+    }
+
 }

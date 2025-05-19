@@ -44,4 +44,9 @@ public class DonorServiceImpl implements DonorService {
     public List<Donor> getAllDonors() {
         return donorRepository.findAll();
     }
+
+    @Override
+    public Donor getDonorById(Long id) {
+        return donorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Donor not found with ID: " + id));
+    }
 }

@@ -1,4 +1,5 @@
 package com.app.bloodbank.controller;
+import com.app.bloodbank.model.Donor;
 import com.app.bloodbank.model.Patient;
 import com.app.bloodbank.service.PatientService;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @RequestMapping("")
+    @GetMapping("")
     public List<Patient> getPatients() {
         return patientService.getAllPatients();
     }
@@ -40,4 +41,10 @@ public class PatientController {
         patientService.deletePatient(id);
         return ResponseEntity.ok("Patient deleted successfully");
     }
+
+    @GetMapping("/{id}")
+    public Patient getPatientById(@PathVariable Long id) {
+        return patientService.getPatientById(id);
+    }
+
 }

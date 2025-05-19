@@ -16,7 +16,7 @@ public class DonorController {
         this.donorService = donorService;
     }
 
-    @RequestMapping("")
+    @GetMapping("")
     public List<Donor> getDonors() {
         return donorService.getAllDonors();
     }
@@ -39,4 +39,10 @@ public class DonorController {
         donorService.deleteDonor(id);
         return ResponseEntity.ok("Donor deleted successfully");
     }
+
+    @GetMapping("/{id}")
+    public Donor getDonorById(@PathVariable Long id) {
+        return donorService.getDonorById(id);
+    }
+
 }
