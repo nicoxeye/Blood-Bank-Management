@@ -1,10 +1,14 @@
 package com.app.bloodbank.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Hospital {
 
     @Id
@@ -23,4 +27,12 @@ public class Hospital {
     @OneToMany(mappedBy = "hospital")
     private List<Request> requests;
 
+    public Hospital() { }
+
+    public Hospital(String name, Address address, String contactEmail, String phoneNumber) {
+        this.name = name;
+        this.address = address;
+        this.contactEmail = contactEmail;
+        this.phoneNumber = phoneNumber;
+    }
 }

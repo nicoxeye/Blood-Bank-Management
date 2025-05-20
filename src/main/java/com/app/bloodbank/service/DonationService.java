@@ -13,7 +13,7 @@ public interface DonationService {
     // with localdate.now()
     public abstract void registerDonation(Long donorId, Long bloodBankId);
 
-    public abstract void updateDonation(Long id, Donor updatedData);
+    public abstract void updateDonation(Long id, Donation updatedData);
     public abstract void deleteDonation(Long id);
     public abstract List<Donation> getAllDonations();
 

@@ -1,10 +1,14 @@
 package com.app.bloodbank.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
 public class Request {
     @Id
     @GeneratedValue
@@ -12,6 +16,9 @@ public class Request {
 
     @ManyToOne
     private Hospital hospital;
+
+    @ManyToOne
+    private BloodBank bloodBank;
 
     @ManyToOne
     private BloodType bloodType;
@@ -23,11 +30,15 @@ public class Request {
     @Enumerated(EnumType.STRING)
     private Status status; // PENDING, APPROVED, DENIED, COMPLETED
 
-    public enum Status {
-        PENDING,
-        APPROVED,
-        DENIED,
-        COMPLETED
+    public Request() {}
+
+    public Request(Hospital hospital,BloodBank bloodBank, BloodType bloodType, double quantityInLiters, LocalDate requestDate, Status status) {
+        this.hospital = hospital;
+        this.bloodBank = bloodBank;
+        this.bloodType = bloodType;
+        this.quantityInLiters = quantityInLiters;
+        this.requestDate = requestDate;
+        this.status = status;
     }
 
 }

@@ -46,7 +46,7 @@ public class DonationController {
     }
 
     @PutMapping("/{id}")
-    public void updateDonation(@PathVariable Long id, @RequestBody Donor updatedData) {
+    public void updateDonation(@PathVariable Long id, @RequestBody Donation updatedData) {
         donationService.updateDonation(id, updatedData);
     }
 

@@ -47,16 +47,13 @@ public class DonationServiceImpl implements DonationService {
 
     @Transactional
     @Override
-    public void updateDonation(Long id, Donor updatedData) {
-        Donor existingDonor = donorRepository.findById(id).orElseThrow(() -> new RuntimeException("Donor not found"));
+    public void updateDonation(Long id, Donation updatedData) {
+        Donation existingDonation = getDonationById(id);
 
-        existingDonor.setBloodType(updatedData.getBloodType());
-        existingDonor.setSurname(updatedData.getSurname());
-        existingDonor.setAddress(updatedData.getAddress());
-        existingDonor.setPhoneNumber(updatedData.getPhoneNumber());
-        existingDonor.setGender(updatedData.getGender());
-        existingDonor.setName(updatedData.getName());
-        existingDonor.setDateOfBirth(updatedData.getDateOfBirth());
+        existingDonation.setBloodType(updatedData.getBloodType());
+        existingDonation.setDonor(updatedData.getDonor());
+        existingDonation.setBloodBank(updatedData.getBloodBank());
+        existingDonation.setDate(updatedData.getDate());
 
     }
 
@@ -70,8 +67,15 @@ public class DonationServiceImpl implements DonationService {
         return donationRepository.findAll();
     }
 
+
+    //TODO
     @Override
     public Donation getDonationById(Long id) {
         return donationRepository.findById(id).orElseThrow(() -> new RuntimeException("Donation not found"));
+    }
+
+    @Override
+    public List<Donation> getDonationsByDonorId(Long donorId) {
+        return List.of();
     }
 }
