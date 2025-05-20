@@ -1,5 +1,6 @@
 package com.app.bloodbank.service;
 
+import com.app.bloodbank.model.BloodType;
 import com.app.bloodbank.model.Donor;
 import com.app.bloodbank.repository.DonorRepository;
 import jakarta.transaction.Transactional;
@@ -48,5 +49,17 @@ public class DonorServiceImpl implements DonorService {
     @Override
     public Donor getDonorById(Long id) {
         return donorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Donor not found with ID: " + id));
+    }
+
+
+    //TODO
+    @Override
+    public List<Donor> findByBloodType(BloodType bloodType) {
+        return List.of();
+    }
+
+    @Override
+    public List<Donor> findByBloodType(String group, String protein) {
+        return List.of();
     }
 }

@@ -1,5 +1,6 @@
 package com.app.bloodbank.service;
 
+import com.app.bloodbank.model.BloodType;
 import com.app.bloodbank.model.Patient;
 import com.app.bloodbank.repository.PatientRepository;
 import jakarta.transaction.Transactional;
@@ -49,6 +50,18 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient getPatientById(Long id) {
         return patientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Patient not found with ID: " + id));
+    }
+
+
+    //TODO
+    @Override
+    public List<Patient> findByBloodType(BloodType bloodType) {
+        return List.of();
+    }
+
+    @Override
+    public List<Patient> findByBloodType(String group, String protein) {
+        return List.of();
     }
 
 }
