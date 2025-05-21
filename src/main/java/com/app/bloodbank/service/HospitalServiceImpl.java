@@ -3,9 +3,11 @@ package com.app.bloodbank.service;
 import com.app.bloodbank.model.Hospital;
 import com.app.bloodbank.repository.HospitalRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class HospitalServiceImpl implements HospitalService {
 
     private final HospitalRepository hospitalRepository;

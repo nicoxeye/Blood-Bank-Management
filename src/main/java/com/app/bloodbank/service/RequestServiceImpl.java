@@ -8,10 +8,12 @@ import com.app.bloodbank.repository.BloodInventoryRepository;
 import com.app.bloodbank.repository.BloodTypeRepository;
 import com.app.bloodbank.repository.RequestRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository requestRepository;
