@@ -58,11 +58,6 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
-    public void deleteDonation(Long id) {
-        donationRepository.deleteById(id);
-    }
-
-    @Override
     public List<Donation> getAllDonations() {
         return donationRepository.findAll();
     }

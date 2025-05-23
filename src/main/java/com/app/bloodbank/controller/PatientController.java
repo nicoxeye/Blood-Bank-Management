@@ -1,6 +1,8 @@
 package com.app.bloodbank.controller;
+import com.app.bloodbank.model.Address;
 import com.app.bloodbank.model.Donor;
 import com.app.bloodbank.model.Patient;
+import com.app.bloodbank.repository.AddressRepository;
 import com.app.bloodbank.service.PatientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.List;
 public class PatientController {
 
     private final PatientService patientService;
+    private final AddressRepository addressRepository;
 
-    public PatientController(PatientService patientService) {
+    public PatientController(PatientService patientService, AddressRepository addressRepository) {
         this.patientService = patientService;
+        this.addressRepository = addressRepository;
     }
 
     @GetMapping("")
@@ -23,15 +27,34 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
-    @PostMapping // works only if address exists;; need to fix this
-    //TODO: CHECK THIS!! ON: POSTMAN
+    @PostMapping
     public ResponseEntity<String> addPatient(@RequestBody Patient patient) {
+
+        Address address = patient.getAddress();
+        List<Address> addresses = addressRepository.findAll();
+
+        // creating new address if it doesn't exist :)
+        if (!addresses.contains(address)) {
+            addresses.add(address);
+            addressRepository.saveAll(addresses);
+        }
+
         patientService.addPatient(patient);
         return ResponseEntity.ok("Patient added successfully");
     }
 
-    @PutMapping("/{id}") // works only if address exists;; need to fix this
+    @PutMapping("/{id}")
     public ResponseEntity<String> updatePatient(@PathVariable Long id, @RequestBody Patient updatedPatientData) {
+
+        Address address = updatedPatientData.getAddress();
+        List<Address> addresses = addressRepository.findAll();
+
+        // creating new address if it doesn't exist :)
+        if (!addresses.contains(address)) {
+            addresses.add(address);
+            addressRepository.saveAll(addresses);
+        }
+
         patientService.updatePatient(id, updatedPatientData);
         return ResponseEntity.ok("Patient updated successfully");
     }

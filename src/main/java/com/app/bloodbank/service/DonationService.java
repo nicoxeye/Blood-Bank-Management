@@ -14,7 +14,6 @@ public interface DonationService {
     public abstract void registerDonation(Long donorId, Long bloodBankId);
 
     public abstract void updateDonation(Long id, Donation updatedData);
-    public abstract void deleteDonation(Long id);
     public abstract List<Donation> getAllDonations();
 
     public abstract Donation getDonationById(Long id);

@@ -34,6 +34,7 @@ public class DonationData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (donationRepository.count() == 0) {
+
             Donor donor = donorRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("Donor with ID 1 not found"));
 
             Address address = new Address("Poland", "Warszawa", "3 Maja", "20300");

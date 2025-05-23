@@ -45,15 +45,20 @@ public class DonationController {
         return ResponseEntity.ok("Donation registered for " + localDate + " by donor ID " + donorId + " and blood bank ID " + bloodBankId);
     }
 
-    // TODO: MAYBE CHANGE TO RESPONSE ENTITY<>
     @PutMapping("/{id}")
     public void updateDonation(@PathVariable Long id, @RequestBody Donation updatedData) {
         donationService.updateDonation(id, updatedData);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteDonation(@PathVariable Long id) {
-        donationService.deleteDonation(id);
+    @GetMapping("/donor/{id}")
+    public Donation getDonorById(@PathVariable Long id) {
+        Donation donation = donationService.getDonationById(id);
+        if (donation == null) {
+            throw new IllegalArgumentException("Donation with ID " + id + " not found");
+        }else {
+            return donation;
+        }
     }
+
 }
 
