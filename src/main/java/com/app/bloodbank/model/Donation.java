@@ -1,5 +1,6 @@
 package com.app.bloodbank.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,12 @@ public class Donation {
 
     @ManyToOne
     @JoinColumn(name = "donor_id")
+    @JsonBackReference
     private Donor donor;
 
     @ManyToOne
     @JoinColumn(name = "bloodbank_id")
+    @JsonBackReference("bloodbank-donations")
     private BloodBank bloodBank;
 
     @ManyToOne

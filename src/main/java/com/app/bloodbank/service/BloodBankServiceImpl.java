@@ -41,11 +41,6 @@ public class BloodBankServiceImpl implements BloodBankService {
     }
 
     @Override
-    public void deleteBloodBank(Long id) {
-        bloodbankRepository.deleteById(id);
-    }
-
-    @Override
     public List<BloodBank> findBloodBankByCity(String city) {
         return bloodbankRepository.findByAddress_City(city);
     }

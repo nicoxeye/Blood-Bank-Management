@@ -1,5 +1,6 @@
 package com.app.bloodbank.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class BloodBank {
     private Address address;
 
     @OneToMany(mappedBy = "bloodBank")
+    @JsonManagedReference("bloodbank-donations")
     private List<Donation> donations = new ArrayList<>();
 
     @OneToMany(mappedBy = "bloodBank")
