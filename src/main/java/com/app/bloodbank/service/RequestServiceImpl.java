@@ -70,7 +70,7 @@ public class RequestServiceImpl implements RequestService {
                 request.setStatus(Status.COMPLETED);
             } else {
                 // not enough blood
-                request.setStatus(Status.PENDING);
+                request.setStatus(Status.DENIED);
             }
         }
         else {

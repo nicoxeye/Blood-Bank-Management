@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bloodbanks")
@@ -31,17 +32,21 @@ public class BloodBankController {
         return bloodbankService.getBloodBankById(id);
     }
 
-    @PostMapping("")
+    @PostMapping()
     public ResponseEntity<String> createBloodBank(@RequestBody BloodBank bloodbank) {
 
-        Address address = bloodbank.getAddress();
-        List<Address> addresses = addressRepository.findAll();
+        Address incomingAddress = bloodbank.getAddress();
 
-        // creating new address if it doesn't exist :)
-        if (!addresses.contains(address)) {
-            addresses.add(address);
-            addressRepository.saveAll(addresses);
-        }
+        // findinf an address with the same metadata
+        Optional<Address> existingAddress = addressRepository.findByCountryAndCityAndStreetAndZipcode(
+                        incomingAddress.getCountry(),
+                        incomingAddress.getCity(),
+                        incomingAddress.getStreet(),
+                        incomingAddress.getZipcode());
+
+        Address finalAddress = existingAddress.orElseGet(() -> addressRepository.save(incomingAddress));
+
+        bloodbank.setAddress(finalAddress);
 
         bloodbankService.addBloodBank(bloodbank);
 
@@ -51,18 +56,28 @@ public class BloodBankController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateBloodBank(@RequestBody BloodBank updatedData, @PathVariable Long id) {
 
-        Address address = updatedData.getAddress();
-        List<Address> addresses = addressRepository.findAll();
+        Address incomingAddress = updatedData.getAddress();
 
-        // creating new address if it doesn't exist :)
-        if (!addresses.contains(address)) {
-            addresses.add(address);
-            addressRepository.saveAll(addresses);
-        }
+        // findinf an address with the same metadata
+        Optional<Address> existingAddress = addressRepository.findByCountryAndCityAndStreetAndZipcode(
+                incomingAddress.getCountry(),
+                incomingAddress.getCity(),
+                incomingAddress.getStreet(),
+                incomingAddress.getZipcode());
+
+        Address finalAddress = existingAddress.orElseGet(() -> addressRepository.save(incomingAddress));
+
+        updatedData.setAddress(finalAddress);
 
         bloodbankService.updateBloodBank(id, updatedData);
 
         return ResponseEntity.ok("Blood bank updated");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBloodBank(@PathVariable Long id) {
+        bloodbankService.deleteBloodBank(id);
+        return ResponseEntity.ok("Blood bank deleted");
     }
 
     @GetMapping("/city/{city}")
@@ -70,5 +85,7 @@ public class BloodBankController {
         city = city.toUpperCase();
         return bloodbankService.findBloodBankByCity(city);
     }
+
+
 
 }

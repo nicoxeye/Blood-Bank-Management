@@ -1,7 +1,9 @@
 package com.app.bloodbank.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Donor {
     @Id
     @GeneratedValue
@@ -40,15 +43,11 @@ public class Donor {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "donor")
-    @JsonBackReference("donor-donation")
-    private List<Donation> donations;
-
     public Donor() {}
 
     public Donor(String name, String surname, BloodType bloodType, LocalDate dateOfBirth, String gender, Address address, String phoneNumber) {
-        this.name = name;
-        this.surname = surname;
+        this.name = name.toUpperCase();
+        this.surname = surname.toUpperCase();
         this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
         switch (gender) {

@@ -2,6 +2,7 @@ package com.app.bloodbank.service;
 
 import com.app.bloodbank.model.BloodBank;
 import com.app.bloodbank.repository.BloodBankRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +35,15 @@ public class BloodBankServiceImpl implements BloodBankService {
     @Transactional
     @Override
     public void updateBloodBank(Long id, BloodBank updatedData) {
-        BloodBank existingBloodBank = getBloodBankById(id);
+        BloodBank existingBloodBank = bloodbankRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("BloodBank not found"));
 
         existingBloodBank.setName(updatedData.getName());
         existingBloodBank.setAddress(updatedData.getAddress());
+    }
+
+    @Override
+    public void deleteBloodBank(Long id) {
+        bloodbankRepository.deleteById(id);
     }
 
     @Override

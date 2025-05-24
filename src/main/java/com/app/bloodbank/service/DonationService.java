@@ -1,10 +1,10 @@
 package com.app.bloodbank.service;
 
 import com.app.bloodbank.model.Donation;
-import com.app.bloodbank.model.Donor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface DonationService {
     // with date parameter, to register older donations

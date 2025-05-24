@@ -5,9 +5,11 @@ import com.app.bloodbank.repository.BloodBankRepository;
 import com.app.bloodbank.repository.BloodInventoryRepository;
 import com.app.bloodbank.repository.BloodTypeRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BloodInventoryServiceImpl implements BloodInventoryService {
 
     private final BloodInventoryRepository bloodInventoryRepository;
@@ -24,26 +26,6 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
     @Override
     public BloodInventory getBloodInventoryById(Long id) {
         return bloodInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("BloodBank not found"));
-    }
-
-    @Override
-    public void addBloodInventory(BloodInventory bloodInventory) {
-        bloodInventoryRepository.save(bloodInventory);
-    }
-
-    @Transactional
-    @Override
-    public void updateBloodInventory(Long id, BloodInventory updatedData) {
-        BloodInventory existingInventory = getBloodInventoryById(id);
-
-        existingInventory.setBloodBank(updatedData.getBloodBank());
-        existingInventory.setBloodBank(updatedData.getBloodBank());
-        existingInventory.setQuantityInLiters(updatedData.getQuantityInLiters());
-    }
-
-    @Override
-    public void deleteBloodInventory(Long id) {
-        bloodInventoryRepository.deleteById(id);
     }
 
     @Transactional

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -30,14 +31,18 @@ public class PatientController {
     @PostMapping
     public ResponseEntity<String> addPatient(@RequestBody Patient patient) {
 
-        Address address = patient.getAddress();
-        List<Address> addresses = addressRepository.findAll();
+        Address incomingAddress = patient.getAddress();
 
-        // creating new address if it doesn't exist :)
-        if (!addresses.contains(address)) {
-            addresses.add(address);
-            addressRepository.saveAll(addresses);
-        }
+        // finding an address with the same metadata
+        Optional<Address> existingAddress = addressRepository.findByCountryAndCityAndStreetAndZipcode(
+                incomingAddress.getCountry(),
+                incomingAddress.getCity(),
+                incomingAddress.getStreet(),
+                incomingAddress.getZipcode());
+
+        Address finalAddress = existingAddress.orElseGet(() -> addressRepository.save(incomingAddress));
+
+        patient.setAddress(finalAddress);
 
         patientService.addPatient(patient);
         return ResponseEntity.ok("Patient added successfully");
@@ -46,14 +51,18 @@ public class PatientController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updatePatient(@PathVariable Long id, @RequestBody Patient updatedPatientData) {
 
-        Address address = updatedPatientData.getAddress();
-        List<Address> addresses = addressRepository.findAll();
+        Address incomingAddress = updatedPatientData.getAddress();
 
-        // creating new address if it doesn't exist :)
-        if (!addresses.contains(address)) {
-            addresses.add(address);
-            addressRepository.saveAll(addresses);
-        }
+        // finding an address with the same metadata
+        Optional<Address> existingAddress = addressRepository.findByCountryAndCityAndStreetAndZipcode(
+                incomingAddress.getCountry(),
+                incomingAddress.getCity(),
+                incomingAddress.getStreet(),
+                incomingAddress.getZipcode());
+
+        Address finalAddress = existingAddress.orElseGet(() -> addressRepository.save(incomingAddress));
+
+        updatedPatientData.setAddress(finalAddress);
 
         patientService.updatePatient(id, updatedPatientData);
         return ResponseEntity.ok("Patient updated successfully");

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/donors")
@@ -26,31 +27,41 @@ public class DonorController {
         return donorService.getAllDonors();
     }
 
-    @PostMapping // works only if address exists;; need to fix this
+    @PostMapping
     public ResponseEntity<String> addDonor(@RequestBody Donor donor) {
 
-        Address address = donor.getAddress();
-        List<Address> addresses = addressRepository.findAll();
+        Address incomingAddress = donor.getAddress();
 
-        // creating new address if it doesn't exist :)
-        if (!addresses.contains(address)) {
-            addresses.add(address);
-            addressRepository.saveAll(addresses);
-        }
+        // finding an address with the same metadata
+        Optional<Address> existingAddress = addressRepository.findByCountryAndCityAndStreetAndZipcode(
+                incomingAddress.getCountry(),
+                incomingAddress.getCity(),
+                incomingAddress.getStreet(),
+                incomingAddress.getZipcode());
+
+        Address finalAddress = existingAddress.orElseGet(() -> addressRepository.save(incomingAddress));
+
+        donor.setAddress(finalAddress);
 
         donorService.addDonor(donor);
         return ResponseEntity.ok("Donor added successfully");
     }
 
-    @PutMapping("/{id}") // works only if address exists;; need to fix this
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateDonor(@PathVariable Long id, @RequestBody Donor updatedDonorData) {
 
-        Address address = updatedDonorData.getAddress();
-        List<Address> addresses = addressRepository.findAll();
-        if (!addresses.contains(address)) {
-            addresses.add(address);
-            addressRepository.saveAll(addresses);
-        }
+        Address incomingAddress = updatedDonorData.getAddress();
+
+        // finding an address with the same metadata
+        Optional<Address> existingAddress = addressRepository.findByCountryAndCityAndStreetAndZipcode(
+                incomingAddress.getCountry(),
+                incomingAddress.getCity(),
+                incomingAddress.getStreet(),
+                incomingAddress.getZipcode());
+
+        Address finalAddress = existingAddress.orElseGet(() -> addressRepository.save(incomingAddress));
+
+        updatedDonorData.setAddress(finalAddress);
 
         donorService.updateDonor(id, updatedDonorData);
         return ResponseEntity.ok("Donor updated successfully");

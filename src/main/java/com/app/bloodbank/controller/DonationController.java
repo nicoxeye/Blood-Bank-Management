@@ -1,8 +1,6 @@
 package com.app.bloodbank.controller;
 
-import com.app.bloodbank.model.BloodBank;
 import com.app.bloodbank.model.Donation;
-import com.app.bloodbank.model.Donor;
 import com.app.bloodbank.service.DonationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,12 +49,12 @@ public class DonationController {
     }
 
     @GetMapping("/donor/{id}")
-    public Donation getDonorById(@PathVariable Long id) {
-        Donation donation = donationService.getDonationById(id);
-        if (donation == null) {
+    public List<Donation> getDonationsByDonorId(@PathVariable Long id) {
+        List<Donation> list = donationService.getDonationsByDonorId(id);
+        if (list.isEmpty()) {
             throw new IllegalArgumentException("Donation with ID " + id + " not found");
         }else {
-            return donation;
+            return list;
         }
     }
 
