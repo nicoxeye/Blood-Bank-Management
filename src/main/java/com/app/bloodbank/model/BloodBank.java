@@ -24,6 +24,7 @@ public class BloodBank {
     private Address address;
 
     @OneToMany(mappedBy = "bloodBank")
+    @JsonIgnore
     private List<Donation> donations = new ArrayList<>();
 
     @OneToMany(mappedBy = "bloodBank")

@@ -12,4 +12,8 @@ public interface BloodInventoryRepository extends JpaRepository<BloodInventory, 
     Double getAvailableBloodStock(@Param("bloodBankId") Long bloodBankId, @Param("bloodTypeId") Long bloodTypeId);
 
     Optional<BloodInventory> findByBloodBankIdAndBloodTypeId(Long bloodBankId, Long bloodTypeId);
+
+    @Query("SELECT SUM(b.quantityInLiters) FROM BloodInventory b")
+    Double totalBloodQuantity();
+
 }

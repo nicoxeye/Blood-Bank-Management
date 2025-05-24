@@ -16,14 +16,12 @@ public class DonationServiceImpl implements DonationService {
     private final DonorRepository donorRepository;
     private final BloodBankRepository bloodBankRepository;
     private final BloodInventoryRepository bloodInventoryRepository;
-    private final RequestRepository requestRepository;
 
-    public DonationServiceImpl(DonationRepository donationRepository, DonorRepository donorRepository, BloodBankRepository bloodBankRepository, BloodInventoryRepository bloodInventoryRepository, RequestRepository requestRepository) {
+    public DonationServiceImpl(DonationRepository donationRepository, DonorRepository donorRepository, BloodBankRepository bloodBankRepository, BloodInventoryRepository bloodInventoryRepository) {
         this.donationRepository = donationRepository;
         this.donorRepository = donorRepository;
         this.bloodBankRepository = bloodBankRepository;
         this.bloodInventoryRepository = bloodInventoryRepository;
-        this.requestRepository = requestRepository;
     }
 
     @Transactional
@@ -52,35 +50,8 @@ public class DonationServiceImpl implements DonationService {
         inventory.setQuantityInLiters(inventory.getQuantityInLiters() + quantity);
         bloodInventoryRepository.save(inventory);
 
-        // automatically process pending requests after updating inventory
-        processPendingRequests(bloodBank.getId(), bloodType.getId());
     }
 
-    private void processPendingRequests(Long bloodBankId, Long bloodTypeId) {
-
-        List<Request> pendingRequests = requestRepository.findByBloodBankIdAndBloodTypeIdAndStatus(bloodBankId, bloodTypeId, Status.PENDING);
-
-        Optional<BloodInventory> inventoryOpt = bloodInventoryRepository.findByBloodBankIdAndBloodTypeId(bloodBankId, bloodTypeId);
-
-        if (inventoryOpt.isEmpty()) {
-            return;
-        }
-
-        BloodInventory inventory = inventoryOpt.get();
-
-        for (Request request : pendingRequests) {
-            double requestedLiters = request.getQuantityInLiters();
-
-            if (inventory.getQuantityInLiters() >= requestedLiters) {
-                inventory.setQuantityInLiters(inventory.getQuantityInLiters() - requestedLiters);
-                request.setStatus(Status.COMPLETED);
-                requestRepository.save(request);
-            }
-
-        }
-
-        bloodInventoryRepository.save(inventory);
-    }
 
     @Transactional
     @Override
@@ -108,8 +79,6 @@ public class DonationServiceImpl implements DonationService {
         inventory.setQuantityInLiters(inventory.getQuantityInLiters() + quantity);
         bloodInventoryRepository.save(inventory);
 
-        // automatically process pending requests after updating inventory
-        processPendingRequests(bloodBank.getId(), bloodType.getId());
     }
 
     @Transactional

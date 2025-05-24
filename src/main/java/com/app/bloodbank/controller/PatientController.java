@@ -3,7 +3,9 @@ import com.app.bloodbank.model.Address;
 import com.app.bloodbank.model.Donor;
 import com.app.bloodbank.model.Patient;
 import com.app.bloodbank.repository.AddressRepository;
+import com.app.bloodbank.repository.PatientRepository;
 import com.app.bloodbank.service.PatientService;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +19,12 @@ public class PatientController {
 
     private final PatientService patientService;
     private final AddressRepository addressRepository;
+    private final PatientRepository patientRepository;
 
-    public PatientController(PatientService patientService, AddressRepository addressRepository) {
+    public PatientController(PatientService patientService, AddressRepository addressRepository, PatientRepository patientRepository) {
         this.patientService = patientService;
         this.addressRepository = addressRepository;
+        this.patientRepository = patientRepository;
     }
 
     @GetMapping("")
@@ -79,4 +83,16 @@ public class PatientController {
         return patientService.getPatientById(id);
     }
 
+    @GetMapping("/search")
+    public List<Patient> searchPatients(@RequestParam(required = false) String name, @RequestParam(required = false) String city) {
+        if (name != null) return patientRepository.findByNameContainingIgnoreCase(name);
+        if (city != null) return patientRepository.findByCity(city);
+
+        return patientRepository.findAll();
+    }
+
+    @GetMapping("/sorted")
+    public List<Patient> getDonorsSorted(@RequestParam(defaultValue = "name") String sortBy) {
+        return patientRepository.findAll(Sort.by(sortBy));
+    }
 }

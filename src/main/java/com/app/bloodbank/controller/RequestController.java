@@ -26,6 +26,7 @@ public class RequestController {
     @PostMapping
     public ResponseEntity<String> createRequest(@RequestBody Request request) {
         requestService.createRequest(request);
+        requestService.processRequest(request.getId());
         return ResponseEntity.ok("Request created");
     }
 

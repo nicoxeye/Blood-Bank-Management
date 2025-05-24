@@ -1,9 +1,12 @@
 package com.app.bloodbank.controller;
 
 import com.app.bloodbank.model.Address;
+import com.app.bloodbank.model.BloodType;
 import com.app.bloodbank.model.Donor;
 import com.app.bloodbank.repository.AddressRepository;
+import com.app.bloodbank.repository.DonorRepository;
 import com.app.bloodbank.service.DonorService;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +19,12 @@ public class DonorController {
 
     private final DonorService donorService;
     private final AddressRepository addressRepository;
+    private final DonorRepository donorRepository;
 
-    public DonorController(DonorService donorService, AddressRepository addressRepository) {
+    public DonorController(DonorService donorService, AddressRepository addressRepository, DonorRepository donorRepository) {
         this.donorService = donorService;
         this.addressRepository = addressRepository;
+        this.donorRepository = donorRepository;
     }
 
     @GetMapping("")
@@ -76,6 +81,20 @@ public class DonorController {
     @GetMapping("/{id}")
     public Donor getDonorById(@PathVariable Long id) {
         return donorService.getDonorById(id);
+    }
+
+
+    @GetMapping("/search")
+    public List<Donor> searchDonors(@RequestParam(required = false) String name, @RequestParam(required = false) String city) {
+        if (name != null) return donorRepository.findByNameContainingIgnoreCase(name);
+        if (city != null) return donorRepository.findByCity(city);
+
+        return donorRepository.findAll();
+    }
+
+    @GetMapping("/sorted")
+    public List<Donor> getDonorsSorted(@RequestParam(defaultValue = "name") String sortBy) {
+        return donorRepository.findAll(Sort.by(sortBy));
     }
 
 }
