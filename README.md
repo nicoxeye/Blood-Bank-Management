@@ -1,8 +1,31 @@
 # BLOOD BANK MANAGEMENT
-first draft of the database, will update it with any changes
+<pre>
+  A simple web app back-end for a Blood Bank System.
+      In the future I plan to add React to the project to create a front-end and visualize the web app :]
 
+  In its default configuration, this project uses an data-file database (H2) which gets populated at startup with data. The h2 console is exposed at http://localhost:8080/h2-console.
+    There are 9 model classes (entities) in total, which most of them have some sort of controller.
+</pre>
+## PREVIEW OF LOADED DATA + ONES ADDED BY ME WHILE TESTING THE CONTROLLERS;
+![image](https://github.com/user-attachments/assets/cea78778-4e65-4871-bbee-a911f8b69420)
+
+![image](https://github.com/user-attachments/assets/0c658c7b-47ef-41e5-90ba-eac80d2d2e6d)
+
+![image](https://github.com/user-attachments/assets/92d99e44-0a76-4e2a-b531-76250b280ca6)
+
+![image](https://github.com/user-attachments/assets/f69e44a6-27dd-47b2-88c4-538b8ddd6a8d)
+
+
+
+
+
+
+
+
+
+
+## PREVIEW OF TABLES (the relationships may be wrong)
 created on https://dbdiagram.io
-
 ![Untitled](https://github.com/user-attachments/assets/fba3e7bb-d2da-475c-a53a-d8c533fd89bc)
 <pre>
 Table Address {
