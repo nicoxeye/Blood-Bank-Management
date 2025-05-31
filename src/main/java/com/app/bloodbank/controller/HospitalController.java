@@ -28,7 +28,7 @@ public class HospitalController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> addHospital(Hospital hospital) {
+    public ResponseEntity<String> addHospital(@RequestBody Hospital hospital) {
 
         Address incomingAddress = hospital.getAddress();
 
@@ -48,7 +48,7 @@ public class HospitalController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateHospital(@PathVariable Long id, Hospital updatedHospital) {
+    public ResponseEntity<String> updateHospital(@PathVariable Long id, @RequestBody Hospital updatedHospital) {
 
         Address incomingAddress = updatedHospital.getAddress();
 
