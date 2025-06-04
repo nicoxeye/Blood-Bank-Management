@@ -20,6 +20,9 @@
 |+ statistics which include how much of blood quantity there is total in all of blood banks and how many requests have been assigned a specified status and grouped by it :]
 
 ### todo +++ in the future
+- add a simple frontend to visualise for project acceptation
+
+
 - implementation of frontend using react or thymeleaf
 - additional sorting when it is needed
 
