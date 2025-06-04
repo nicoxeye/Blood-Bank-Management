@@ -1,0 +1,18 @@
+body {
+    font-family: "Alumni Sans SC", cursive;
+    background: url('background.png');
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-box {
+    text-align: center;
+}
+
+h1, h3 {
+    color: white;
+}

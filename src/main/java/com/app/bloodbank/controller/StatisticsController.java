@@ -42,4 +42,5 @@ public class StatisticsController {
 
         return stats;
     }
+
 }
