@@ -15,4 +15,9 @@ public class PageController {
     public String manageBloodbanksPage() {
         return "bloodbank/bloodbanks";
     }
+
+    @GetMapping("/bloodbank/donors")
+    public String manageDonorsPage() {
+        return "bloodbank/donor/donors";
+    }
 }

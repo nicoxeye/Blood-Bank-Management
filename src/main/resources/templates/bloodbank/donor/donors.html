@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blood Banks Viewer</title>
+    <title>Donors</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,36 +13,47 @@
 <body class="text-white">
 <div class="container py-5">
     <a class="btn btn-outline-dark btn-lg" href="javascript:window. history. back();">Back</a>
-    <h1 class="text-center mb-4">View BloodBanks</h1>
+    <h1 class="text-center mb-4">View Donors</h1>
 
+    <div class="d-flex justify-content-center gap-3 mb-3">
+        <a class="btn btn-outline-dark btn-lg" onclick="addDonor()">Add Donor</a> <!--TODO-->
+    </div>
     <div class="d-flex justify-content-center mb-3 gap-3">
+        <label for="search-surname">
+            <input type="text" id="search-surname" placeholder="Search by surname" class="form-control w-auto">
+        </label>
         <label for="search-city">
             <input type="text" id="search-city" placeholder="Search by city" class="form-control w-auto">
         </label>
     </div>
-    <div class="d-flex justify-content-center gap-3 mb-5">
-        <a class="btn btn-outline-dark btn-lg" onclick="searchBloodBanks()">Search</a>
-        <a class="btn btn-outline-dark btn-lg" onclick="fetch_bloodbanks()">Reset</a>
+    <div class="d-flex justify-content-center gap-3 mb-4">
+        <a class="btn btn-outline-dark btn-lg" onclick="searchDonors()">Search</a>
+        <a class="btn btn-outline-dark btn-lg" onclick="fetch_donors()">Reset</a>
     </div>
+
 
     <table class="table table-bordered transparent-table">
         <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Surname</th>
+            <th>Blood Type</th>
+            <th>Date Of Birth</th>
+            <th>Gender</th>
             <th>Country, City & Street</th>
-            <th>How Many Donations</th>
-            <th>Blood Inventory</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
         </tr>
         </thead>
-        <tbody id="bloodbanks-table-body"> <!-- table filled by javascript below -->
+        <tbody id="donors-table-body"> <!-- table filled by javascript below -->
         </tbody>
     </table>
 </div>
 
-<script src="/js/fetch_bloodbanks.js"></script>
+<script src="/js/fetch_donors.js"></script>
 <script>
-    fetch_bloodbanks();
+    fetch_donors();
 </script>
 
 </body>

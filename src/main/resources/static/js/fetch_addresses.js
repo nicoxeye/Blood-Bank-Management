@@ -1,4 +1,4 @@
-function fetch_addresses() {
+function renderAddresses() {
     fetch('/api/addresses')
         .then(response => response.json())
         .then(data => {
@@ -26,7 +26,7 @@ function deleteAddress(id) {
         fetch(`/api/addresses/${id}`, { method: 'DELETE' })
             .then(() => {
                 document.getElementById('address-table-body').innerHTML = ""; // clearing table
-                fetch_addresses(); // reloading the page
+                renderAddresses(); // reloading the page
             })
             .catch(error => console.error('Delete failed:', error));
     }

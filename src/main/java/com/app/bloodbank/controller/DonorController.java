@@ -85,9 +85,9 @@ public class DonorController {
 
 
     @GetMapping("/search")
-    public List<Donor> searchDonors(@RequestParam(required = false) String name, @RequestParam(required = false) String city) {
-        if (name != null) return donorRepository.findByNameContainingIgnoreCase(name);
-        if (city != null) return donorRepository.findByCity(city);
+    public List<Donor> searchDonors(@RequestParam(required = false) String surname, @RequestParam(required = false) String city) {
+        if (surname != null) return donorRepository.findBySurnameContainingIgnoreCase(surname);
+        else if (city != null) return donorRepository.findByCityContainingIgnoreCase(city);
 
         return donorRepository.findAll();
     }

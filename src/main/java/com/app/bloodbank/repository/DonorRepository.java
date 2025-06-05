@@ -10,9 +10,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface DonorRepository extends JpaRepository<Donor, Long> {
-    List<Donor> findByNameContainingIgnoreCase(String name);
+    List<Donor> findBySurnameContainingIgnoreCase(String surname);
 
     @Query("SELECT d FROM Donor d WHERE d.address.city = :city")
-    List<Donor> findByCity(@Param("city") String city);
-
+    List<Donor> findByCityContainingIgnoreCase(String city);
 }
