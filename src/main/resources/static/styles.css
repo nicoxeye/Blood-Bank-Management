@@ -16,3 +16,15 @@ body {
 h1, h3 {
     color: white;
 }
+
+.transparent-table {
+    background-color: rgb(107, 68, 115);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+}
+
+.transparent-table th,
+.transparent-table td {
+    background-color: transparent !important;
+    color: white;
+}

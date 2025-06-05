@@ -24,11 +24,11 @@ public class BloodBank {
     private Address address;
 
     @OneToMany(mappedBy = "bloodBank")
-    @JsonIgnore
+    // @JsonIgnore
     private List<Donation> donations = new ArrayList<>();
 
     @OneToMany(mappedBy = "bloodBank")
-    @JsonIgnore
+    // @JsonIgnore
     private List<BloodInventory> bloodInventories = new ArrayList<>();
 
     public BloodBank() { }
