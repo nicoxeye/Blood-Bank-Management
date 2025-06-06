@@ -46,4 +46,10 @@ public class HospitalServiceImpl implements HospitalService {
     public Hospital getHospitalById(Long id) {
         return hospitalRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Hospital not found with ID: " + id));
     }
+
+    @Override
+    public List<Hospital> findHospitalByCity(String city) {
+        return hospitalRepository.findByAddress_City(city);
+    }
+
 }

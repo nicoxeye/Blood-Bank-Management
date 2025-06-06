@@ -10,4 +10,6 @@ public interface HospitalService {
     public abstract void updateHospital(Long id, Hospital updatedData);
     public abstract void deleteHospital(Long id);
     public abstract Hospital getHospitalById(Long id);
+
+    List<Hospital> findHospitalByCity(String city);
 }

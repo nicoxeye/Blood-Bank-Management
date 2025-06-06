@@ -16,6 +16,11 @@ public class PageController {
         return "bloodbank/bloodbanks";
     }
 
+    @GetMapping("/admin/bloodbanks")
+    public String manageBloodbanksPage2() {
+        return "bloodbank/bloodbanks";
+    }
+
     @GetMapping("/bloodbank/donors")
     public String manageDonorsPage() {
         return "bloodbank/donor/donors";
@@ -25,4 +30,21 @@ public class PageController {
     public String manageDonationsPage() {
         return "bloodbank/donation/index";
     }
+
+    @GetMapping("/bloodbank/hospitals")
+    public String manageHospitalsPage() {
+        return "bloodbank/hospitals";
+    }
+
+    @GetMapping("/hospital/hospitals")
+    public String manageHospitalsPage2() {
+        return "bloodbank/hospitals";
+    }
+
+    @GetMapping("/admin/hospitals")
+    public String manageHospitalsPage3() {
+        return "bloodbank/hospitals";
+    }
+
+
 }

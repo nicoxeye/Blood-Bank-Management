@@ -1,6 +1,7 @@
 package com.app.bloodbank.controller;
 
 import com.app.bloodbank.model.Address;
+import com.app.bloodbank.model.BloodBank;
 import com.app.bloodbank.model.Hospital;
 import com.app.bloodbank.repository.AddressRepository;
 import com.app.bloodbank.service.HospitalService;
@@ -78,4 +79,10 @@ public class HospitalController {
         return hospitalService.getHospitalById(id);
     }
 
+
+    @GetMapping("/city/{city}")
+    public List<Hospital> findHospitalByCity(@PathVariable String city) {
+        city = city.toUpperCase();
+        return hospitalService.findHospitalByCity(city);
+    }
 }
