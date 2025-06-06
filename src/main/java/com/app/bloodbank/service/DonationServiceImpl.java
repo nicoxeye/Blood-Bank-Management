@@ -95,7 +95,7 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public List<Donation> getAllDonations() {
-        return donationRepository.findAll();
+        return donationRepository.findAllWithDonorAndBankAndInventory();
     }
 
 

@@ -2,7 +2,7 @@ function renderDonations(data) {
     const tbody = document.getElementById('donations-table-body');
     tbody.innerHTML = "";
 
-    // filtrujemy tylko poprawne obiekty donacji
+    // filtering only through valid donation objects oopsie
     const donations = data.filter(donation => donation && typeof donation === 'object' && donation.id);
 
     donations.forEach(donation => {

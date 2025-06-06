@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Donation {
     @Id
     @GeneratedValue
@@ -21,12 +20,14 @@ public class Donation {
 
     private LocalDate date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "donor_id")
+    @JsonManagedReference
     private Donor donor;
 
     @ManyToOne
     @JoinColumn(name = "bloodbank_id")
+    @JsonManagedReference(value = "bloodbank-donations")
     private BloodBank bloodBank;
 
     @ManyToOne

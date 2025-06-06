@@ -1,5 +1,6 @@
 package com.app.bloodbank.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -9,14 +10,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BloodInventory {
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "blood_bank_id")
+    @JsonBackReference(value = "bloodbank-inventories")
     private BloodBank bloodBank;
 
     @ManyToOne
