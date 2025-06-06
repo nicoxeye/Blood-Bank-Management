@@ -1,17 +1,20 @@
 function renderDonations(data) {
     const tbody = document.getElementById('donations-table-body');
     tbody.innerHTML = "";
-    data.forEach(donation => {
+
+    // filtrujemy tylko poprawne obiekty donacji
+    const donations = data.filter(donation => donation && typeof donation === 'object' && donation.id);
+
+    donations.forEach(donation => {
         const row = document.createElement('tr');
-        const donor = typeof donation.donor === 'object' ? donation.donor : null;
         row.innerHTML = `
             <td>${donation.id}</td>
             <td>${donation.date ?? ''}</td>
-            <td>${donor?.id ?? donation.donor ?? ''}</td>
-            <td>${donor.name ?? ''}, ${donor.surname ?? ''}</td>
+            <td>${donation.donor?.id ?? ''}</td>
+            <td>${donation.donor?.name ?? ''}, ${donation.donor?.surname ?? ''}</td>
             <td>${getBloodType(donation) ?? ''}</td>
-            <td>${donation.bloodBank.id ?? ''}</td>
-            <td>${donation.bloodBank.name ?? ''}</td>
+            <td>${donation.bloodBank?.id ?? ''}</td>
+            <td>${donation.bloodBank?.name ?? ''}</td>
             <td>
               <button class="btn btn-sm btn-dark" onclick="">Update</button>
             </td>
@@ -21,11 +24,11 @@ function renderDonations(data) {
 }
 
 
+
 function fetch_donations() {
     fetch('/api/donations')
         .then(response => response.json())
         .then(data => {
-            console.log('Donations fetched:', data);
             renderDonations(data);
         })
         .catch(error => console.error('Error fetching donations:', error));

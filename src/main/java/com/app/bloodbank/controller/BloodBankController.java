@@ -24,9 +24,8 @@ public class BloodBankController {
 
     @GetMapping("")
     public List<BloodBank> getAllBloodBanks() {
-        return bloodbankService.getAllBloodBanks();
+        return bloodbankService.getAllBloodBanksWithDonationsCount();
     }
-
     @GetMapping("/{id}")
     public BloodBank getBloodBankById(@PathVariable Long id) {
         return bloodbankService.getBloodBankById(id);

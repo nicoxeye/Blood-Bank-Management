@@ -7,7 +7,7 @@ function renderBloodbanks(data) {
             <td>${bloodbank.id}</td>
             <td>${bloodbank.name ?? ''}</td>
             <td>${bloodbank.address?.country ?? ''}, ${bloodbank.address?.city ?? ''}, ${bloodbank.address?.street ?? ''}</td>
-            <td>${bloodbank.donations?.length ?? 0}</td>
+            <td>${bloodbank.donationsCount ?? 0}</td>
             <td>${summarizeInventories(bloodbank.bloodInventories)}</td>
         `;
         tbody.appendChild(row);

@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BloodBank {
     @Id
     @GeneratedValue
@@ -19,12 +19,16 @@ public class BloodBank {
 
     private String name;
 
+    @Transient
+    private Long donationsCount;
+
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
     @OneToMany(mappedBy = "bloodBank")
     // @JsonIgnore
+    @JsonIgnore
     private List<Donation> donations = new ArrayList<>();
 
     @OneToMany(mappedBy = "bloodBank")

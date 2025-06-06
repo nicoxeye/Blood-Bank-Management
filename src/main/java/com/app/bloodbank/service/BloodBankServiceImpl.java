@@ -51,4 +51,16 @@ public class BloodBankServiceImpl implements BloodBankService {
         return bloodbankRepository.findByAddress_City(city);
     }
 
+
+
+    public List<BloodBank> getAllBloodBanksWithDonationsCount() {
+        List<BloodBank> bloodBanks = bloodbankRepository.findAll();
+
+        bloodBanks.forEach(bloodBank -> {
+            Long count = bloodbankRepository.countDonationsByBloodBankId(bloodBank.getId());
+            bloodBank.setDonationsCount(count);
+        });
+
+        return bloodBanks;
+    }
 }
