@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:wght@300&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="text-white">
+<div class="container py-5">
+    <a class="btn btn-outline-dark btn-lg" href="javascript:window. history. back();">Back</a>
+    <h1 class="text-center mb-4">View Donations</h1>
+
+    <div class="d-flex justify-content-center gap-3 mb-3">
+        <a class="btn btn-outline-dark btn-lg" onclick="addDonation()">Add Donation With Date Of Now</a> <!--TODO-->
+        <a class="btn btn-outline-dark btn-lg" onclick="addDonationPastDate()">Add Donation With A Past Date</a> <!--TODO-->
+    </div>
+    <div class="d-flex justify-content-center mb-3 gap-3">
+        <label for="search-donor">
+            <input type="text" id="search-donor" placeholder="Search by donor id" class="form-control w-auto">
+        </label>
+    </div>
+    <div class="d-flex justify-content-center gap-3 mb-4">
+        <a class="btn btn-outline-dark btn-lg" onclick="searchDonations()">Search</a>
+        <a class="btn btn-outline-dark btn-lg" onclick="fetch_donations()">Reset</a>
+    </div>
+
+
+    <table class="table table-bordered transparent-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Donor Id</th>
+            <th>Donor Full Name</th>
+            <th>Blood Type</th>
+            <th>Blood Bank Id</th>
+            <th>Blood Bank Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="donations-table-body"> <!-- table filled by javascript below -->
+        </tbody>
+    </table>
+</div>
+
+<script src="/js/fetch_donations.js"></script>
+<script>
+    fetch_donations();
+</script>
+
+</body>
+</html>

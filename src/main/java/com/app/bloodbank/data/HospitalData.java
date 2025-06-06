@@ -28,9 +28,9 @@ public class HospitalData implements CommandLineRunner {
             List<Address> addresses = addressRepository.findAll();
 
             hospitalRepository.saveAll(List.of(
-                    new Hospital("City Hospital", addresses.get(4), "contact@cityhospital.com", "+123456789"),
-                    new Hospital("General Hospital", addresses.get(3), "info@generalhospital.com", "+987654321"),
-                    new Hospital("Healthcare Center", addresses.get(5), "support@healthcare.com", "+1122334455")
+                    new Hospital("City Hospital", addresses.get(1), "contact@cityhospital.com", "+123456789"),
+                    new Hospital("General Hospital", addresses.get(2), "info@generalhospital.com", "+987654321"),
+                    new Hospital("Healthcare Center", addresses.get(3), "support@healthcare.com", "+1122334455")
             ));
         }
     }

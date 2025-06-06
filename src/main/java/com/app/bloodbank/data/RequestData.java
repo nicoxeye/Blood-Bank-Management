@@ -1,3 +1,4 @@
+/*
 package com.app.bloodbank.data;
 
 import com.app.bloodbank.model.*;
@@ -42,10 +43,11 @@ public class RequestData implements CommandLineRunner {
             if (!hospitals.isEmpty() && !bloodBanks.isEmpty() && !bloodTypes.isEmpty()) {
                 Request r1 = new Request(hospitals.get(0), bloodBanks.get(0), bloodTypes.get(0), 2.5, LocalDate.now());
 
-                Request r2 = new Request(hospitals.get(2), bloodBanks.get(1), bloodTypes.get(6), 1.0, LocalDate.now().minusDays(1));
+                Request r2 = new Request(hospitals.get(1), bloodBanks.get(1), bloodTypes.get(6), 1.0, LocalDate.now().minusDays(1));
 
                 requestRepository.saveAll(List.of(r1, r2));
             }
         }
     }
 }
+*/
