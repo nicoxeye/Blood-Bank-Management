@@ -14,7 +14,6 @@ function renderDonors(data) {
             <td>${donor.phoneNumber ?? ''}</td>
             <td>
               <button class="btn btn-sm btn-dark" onclick="">Update</button>
-              <button class="btn btn-sm btn-dark" onclick="">Delete</button>
             </td>
         `;
         tbody.appendChild(row);

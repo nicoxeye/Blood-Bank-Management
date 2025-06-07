@@ -48,5 +48,8 @@ public class PageController {
 
     @GetMapping("/bloodbank/statistics")
     public String manageStatisticsPage1() { return "bloodbank/statistics"; }
-    
+
+    @GetMapping("/bloodbank/donors/add")
+    public String manageDonorAddPage() { return "bloodbank/donor/create"; }
+
 }
