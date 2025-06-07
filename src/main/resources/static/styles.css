@@ -28,3 +28,8 @@ h1, h3 {
     background-color: transparent !important;
     color: white;
 }
+
+.color-card {
+    background-color: rgb(223, 207, 227);
+    backdrop-filter: blur(4px);
+}

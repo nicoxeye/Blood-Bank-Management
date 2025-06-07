@@ -46,5 +46,7 @@ public class PageController {
         return "bloodbank/hospitals";
     }
 
-
+    @GetMapping("/bloodbank/statistics")
+    public String manageStatisticsPage1() { return "bloodbank/statistics"; }
+    
 }
