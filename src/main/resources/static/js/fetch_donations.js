@@ -1,3 +1,6 @@
+let allDonations = [];
+let ascending = true;
+
 function renderDonations(data) {
     const tbody = document.getElementById('donations-table-body');
     tbody.innerHTML = "";
@@ -29,7 +32,11 @@ function fetch_donations() {
     fetch('/api/donations')
         .then(response => response.json())
         .then(data => {
-            renderDonations(data);
+            allDonations = data;
+            renderDonations(allDonations);
+
+            const header = document.getElementById("dateHeader");
+            header.textContent = "Date ⬍";
         })
         .catch(error => console.error('Error fetching donations:', error));
 }
@@ -58,5 +65,20 @@ function searchDonations() {
 
 function getBloodType(donation) {
     return `${donation.bloodType.bloodGroup}${donation.bloodType.protein === 'POSITIVE' ? '+' : '-'}`;
+}
+
+
+function sortByDate() {
+    allDonations.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return ascending ? dateA - dateB : dateB - dateA;
+    });
+
+    const header = document.getElementById("dateHeader");
+    header.textContent = `Date ${ascending ? '▲' : '▼'}`;
+
+    ascending = !ascending;
+    renderDonations(allDonations);
 }
 
