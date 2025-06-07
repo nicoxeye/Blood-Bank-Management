@@ -52,4 +52,10 @@ public class PageController {
     @GetMapping("/bloodbank/donors/add")
     public String manageDonorAddPage() { return "bloodbank/donor/create"; }
 
+    @GetMapping("/bloodbank/donations/register-now")
+    public String manageRegisterDonationPage() { return "bloodbank/donation/createnow"; }
+
+    @GetMapping("/bloodbank/donations/register-past")
+    public String manageRegisterDonationPage2() { return "bloodbank/donation/createpast"; }
+
 }
