@@ -1,12 +1,7 @@
 package com.app.bloodbank.service;
 
-import com.app.bloodbank.model.BloodInventory;
-import com.app.bloodbank.model.Request;
-import com.app.bloodbank.model.Status;
-import com.app.bloodbank.repository.BloodBankRepository;
-import com.app.bloodbank.repository.BloodInventoryRepository;
-import com.app.bloodbank.repository.BloodTypeRepository;
-import com.app.bloodbank.repository.RequestRepository;
+import com.app.bloodbank.model.*;
+import com.app.bloodbank.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +13,35 @@ public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository requestRepository;
     private final BloodInventoryRepository bloodInventoryRepository;
+    private final BloodTypeRepository bloodTypeRepository;
+    private final BloodBankRepository bloodBankRepository;
+    private final HospitalRepository hospitalRepository;
 
-    public RequestServiceImpl(RequestRepository requestRepository, BloodInventoryRepository bloodInventoryRepository) {
+    public RequestServiceImpl(RequestRepository requestRepository, BloodInventoryRepository bloodInventoryRepository, BloodTypeRepository bloodTypeRepository, BloodBankRepository bloodBankRepository, HospitalRepository hospitalRepository) {
         this.requestRepository = requestRepository;
         this.bloodInventoryRepository = bloodInventoryRepository;
+        this.bloodTypeRepository = bloodTypeRepository;
+        this.bloodBankRepository = bloodBankRepository;
+        this.hospitalRepository = hospitalRepository;
     }
 
     @Override
     public void createRequest(Request request) {
-        requestRepository.save(request);
+        Hospital hospital = hospitalRepository.findById(request.getHospital().getId())
+                .orElseThrow(() -> new RuntimeException("Hospital not found"));
+        BloodBank bloodBank = bloodBankRepository.findById(request.getBloodBank().getId())
+                .orElseThrow(() -> new RuntimeException("BloodBank not found"));
+        BloodType bloodType = bloodTypeRepository.findById(request.getBloodType().getId())
+                .orElseThrow(() -> new RuntimeException("BloodType not found"));
+
+        Request newRequest = new Request(
+                hospital,
+                bloodBank,
+                bloodType,
+                request.getQuantityInLiters()
+        );
+
+        requestRepository.save(newRequest);
     }
 
     @Override

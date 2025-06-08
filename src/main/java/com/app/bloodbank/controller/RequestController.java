@@ -23,7 +23,7 @@ public class RequestController {
         return requestService.getAllRequests();
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<String> createRequest(@RequestBody Request request) {
         requestService.createRequest(request);
         requestService.processRequest(request.getId());

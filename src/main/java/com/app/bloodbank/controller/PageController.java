@@ -63,4 +63,10 @@ public class PageController {
 
     @GetMapping("/hospital/patients/add")
     public String managePatientsPage2() { return "hospital/patients/create"; }
+
+    @GetMapping("/hospital/requests")
+    public String manageRequestPage() { return "hospital/requests/requests"; }
+
+    @GetMapping("/hospital/requests/add")
+    public String manageRequestPage2() { return "hospital/requests/create"; }
 }
