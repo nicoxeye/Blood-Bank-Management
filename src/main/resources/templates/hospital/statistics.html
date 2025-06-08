@@ -1,10 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Hospital Statistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:wght@300&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
+<div class="container mt-5">
+  <a class="btn btn-outline-dark btn-lg" href="javascript:window. history. back();">Back</a>
+  <h1 class="text-center mb-4">Hospital Statistics</h1>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center color-card">
+          <h5>Total Patients</h5>
+          <h2 id="totalPatients">...</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center color-card">
+          <h5>Total Requests</h5>
+          <h2 id="totalRequests">...</h2>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5 center-box">Request Statistics</h3>
+    <table class="table table-bordered mt-3 transparent-table">
+      <thead class="table-light">
+      <tr>
+        <th>Request Status</th>
+        <th>Quantity</th>
+      </tr>
+      </thead>
+      <tbody id="requestStats">
+      </tbody>
+
+  </div>
+</div>
+
+<script src="/js/fetch_statistics_hospital.js"></script>
+<script>
+  fetch_statistics();
+</script>
 
 </body>
 </html>
