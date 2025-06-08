@@ -11,7 +11,7 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<Patient> getPatientById(Long id);
 
-    List<Patient> findByNameContainingIgnoreCase(String name);
+    List<Patient> findBySurnameContainingIgnoreCase(String surname);
 
     @Query("SELECT d FROM Donor d WHERE d.address.city = :city")
     List<Patient> findByCity(@Param("city") String city);

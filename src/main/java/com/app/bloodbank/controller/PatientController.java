@@ -84,11 +84,10 @@ public class PatientController {
     }
 
     @GetMapping("/search")
-    public List<Patient> searchPatients(@RequestParam(required = false) String name, @RequestParam(required = false) String city) {
-        if (name != null) return patientRepository.findByNameContainingIgnoreCase(name);
-        if (city != null) return patientRepository.findByCity(city);
-
-        return patientRepository.findAll();
+    public List<Patient> searchPatients(@RequestParam(required = false) String surname, @RequestParam(required = false) String city) {
+        if (surname != null) { return patientRepository.findBySurnameContainingIgnoreCase(surname); }
+        else if (city != null) { return patientRepository.findByCity(city); }
+        else return patientRepository.findAll();
     }
 
     @GetMapping("/sorted")

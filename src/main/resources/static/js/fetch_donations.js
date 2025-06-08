@@ -18,9 +18,6 @@ function renderDonations(data) {
             <td>${getBloodType(donation) ?? ''}</td>
             <td>${donation.bloodBank?.id ?? ''}</td>
             <td>${donation.bloodBank?.name ?? ''}</td>
-            <td>
-              <button class="btn btn-sm btn-dark" onclick="">Update</button>
-            </td>
         `;
         tbody.appendChild(row);
     });

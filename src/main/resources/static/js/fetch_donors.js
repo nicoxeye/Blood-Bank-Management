@@ -12,9 +12,6 @@ function renderDonors(data) {
             <td>${donor.gender ?? ''}</td>
             <td>${donor.address?.country ?? ''}, ${donor.address?.city ?? ''}, ${donor.address?.street ?? ''}</td>
             <td>${donor.phoneNumber ?? ''}</td>
-            <td>
-              <button class="btn btn-sm btn-dark" onclick="">Update</button>
-            </td>
         `;
         tbody.appendChild(row);
     });
